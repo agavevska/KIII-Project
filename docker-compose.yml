@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  room_booking_db:
+    image: postgres:17.4
+    container_name: room_booking_db
+    restart: always
+    environment:
+      POSTGRES_USER: rb
+      POSTGRES_PASSWORD: rb
+      POSTGRES_DB: room_booking
+    ports:
+      - "5435:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - room-booking-network
+
+  room_booking_backend:
+    build: ./room-booking-backend
+    container_name: room_booking_backend
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - room_booking_db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://room_booking_db:5432/room_booking
+      - SPRING_DATASOURCE_USERNAME=rb
+      - SPRING_DATASOURCE_PASSWORD=rb
+    networks:
+      - room-booking-network
+
+  room_booking_frontend:
+    build: ./room-booking-frontend
+    container_name: room_booking_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - room_booking_backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+    networks:
+      - room-booking-network
+
+networks:
+  room-booking-network:
+    driver: bridge
+
+volumes:
+  db_data:

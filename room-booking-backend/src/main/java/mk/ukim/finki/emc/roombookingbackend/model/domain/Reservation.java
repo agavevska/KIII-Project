@@ -7,6 +7,7 @@ import mk.ukim.finki.emc.roombookingbackend.model.enums.ReservationStatus;
 import java.time.LocalDateTime;
 
 @Data
+@Entity
 public class Reservation {
 
     @Id
