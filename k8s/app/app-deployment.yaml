@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: room-booking-deployment
+  namespace: room-booking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: room-booking
+  template:
+    metadata:
+      labels:
+        app: room-booking
+    spec:
+      containers:
+        - name: room-booking-backend
+          image: agavevska/room-booking-backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: room-booking-config
+                  key: SPRING_DATASOURCE_URL
+            - name: APP_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: room-booking-config
+                  key: APP_ENV
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: room-booking-secret
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: room-booking-secret
+                  key: DB_PASSWORD
+
+        - name: room-booking-frontend
+          image: agavevska/room-booking-frontend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: FRONTEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: room-booking-config
+                  key: FRONTEND_URL
