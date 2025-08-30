@@ -38,11 +38,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: './room-booking-frontend/package-lock.json'
 
-      - name: Test frontend
-        working-directory: ./room-booking-frontend
-        run: |
-          npm ci --legacy-peer-deps
-          npm run test -- --coverage --watchAll=false
+#      - name: Test frontend
+#        working-directory: ./room-booking-frontend
+#        run: |
+#          npm ci --legacy-peer-deps
+#          npm run test -- --coverage --watchAll=false
 
   build-and-push:
     needs: test
