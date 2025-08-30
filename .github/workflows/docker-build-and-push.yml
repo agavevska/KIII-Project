@@ -41,7 +41,7 @@ jobs:
       - name: Test frontend
         working-directory: ./room-booking-frontend
         run: |
-          npm ci
+          npm ci --legacy-peer-deps
           npm run test -- --coverage --watchAll=false
 
   build-and-push:
