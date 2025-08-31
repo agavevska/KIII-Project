@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: room-booking-ingress
+  namespace: room-booking
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: room-booking.com
+      http:
+        paths:
+          - path: /frontend
+            pathType: Prefix
+            backend:
+              service:
+                name: room-booking-frontend-service
+                port:
+                  number: 3000
+          - path: /backend
+            pathType: Prefix
+            backend:
+              service:
+                name: room-booking-backend-service
+                port:
+                  number: 8080

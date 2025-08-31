@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: room-booking
+data:
+  POSTGRES_DB: "room_booking_db"
