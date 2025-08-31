@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: room-booking-frontend
+  namespace: room-booking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: room-booking-frontend
+  template:
+    metadata:
+      labels:
+        app: room-booking-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: agavevska/room-booking-frontend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: FRONTEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: room-booking-config
+                  key: FRONTEND_URL
