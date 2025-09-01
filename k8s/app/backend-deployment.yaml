@@ -29,13 +29,13 @@ spec:
                 configMapKeyRef:
                   name: room-booking-config
                   key: APP_ENV
-            - name: DB_USERNAME
+            - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: room-booking-secret
-                  key: DB_USERNAME
-            - name: DB_PASSWORD
+                  name: db-secret
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: room-booking-secret
-                  key: DB_PASSWORD
+                  name: db-secret
+                  key: POSTGRES_PASSWORD
