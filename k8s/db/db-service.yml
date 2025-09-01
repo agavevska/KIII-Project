@@ -4,8 +4,8 @@ metadata:
   name: db-service
   namespace: room-booking
 spec:
-  ports:
-    - port: 5432
-  clusterIP: None
   selector:
     app: room-booking-db
+  ports:
+    - port: 5432
+      targetPort: 5432
