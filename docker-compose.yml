@@ -26,7 +26,7 @@ services:
       - room_booking_db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://room_booking_db:5432/room_booking
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://room_booking_db:5432/room_booking_db
       - SPRING_DATASOURCE_USERNAME=rb
       - SPRING_DATASOURCE_PASSWORD=rb
     networks:

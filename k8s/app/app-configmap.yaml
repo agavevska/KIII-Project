@@ -4,7 +4,7 @@ metadata:
   name: room-booking-config
   namespace: room-booking
 data:
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://room_booking_db:5432/room_booking"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://room_booking_db:5432/room_booking_db"
   APP_ENV: "production"
 
   FRONTEND_URL: "http://localhost:3000"
